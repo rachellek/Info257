@@ -1,0 +1,17 @@
+
+// Create CUSTOMER
+USING PERIODIC COMMIT
+LOAD CSV WITH HEADERS FROM "file:C:///Users/Rachelle/Documents/School/Courses/I257I - Database management/Project/Info257/customer.csv" AS row
+CREATE (:Customer {CustomerID: row.CustomerID, Address: row.Address, Name: row.Name, PrimaryNo: row.PrimaryNo, CustomerDt:row.CustomerDt});
+
+
+
+// Create CUSTOMER
+USING PERIODIC COMMIT
+LOAD CSV WITH HEADERS FROM "file:///Users/Rachelle/Documents/School/Courses/I257I - Database management/Project/Info257/customer.csv" AS row
+CREATE (:Customer {CustomerID: row.CustomerID, Address: row.Address, Name: row.Name, PrimaryNo: row.PrimaryNo, CustomerDt:row.CustomerDt});
+
+// Create CUSTOMER
+USING PERIODIC COMMIT
+LOAD CSV WITH HEADERS FROM "file:///Users/Rachelle/Documents/School/Courses/customer.csv" AS row
+CREATE (:Customer {CustomerID: row.CustomerID, Address: row.Address, Name: row.Name, PrimaryNo: row.PrimaryNo, CustomerDt:row.CustomerDt});

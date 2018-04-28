@@ -1,0 +1,24 @@
+// Create CAR
+USING PERIODIC COMMIT
+LOAD CSV WITH HEADERS FROM "file:Data\car.csv" AS row
+CREATE (:Car {productName: row.ProductName, productID: row.ProductID, unitPrice: toFloat(row.UnitPrice)});
+
+// Create HOUSEHOLD
+USING PERIODIC COMMIT
+LOAD CSV WITH HEADERS FROM "file:Data\household.csv" AS row
+CREATE (:Household {companyName: row.CompanyName, supplierID: row.SupplierID});
+
+// Create BILLING
+USING PERIODIC COMMIT
+LOAD CSV WITH HEADERS FROM "file:Data\billing.csv" AS row
+CREATE (:Billing {employeeID:row.EmployeeID,  firstName: row.FirstName, lastName: row.LastName, title: row.Title});
+
+// Create PRODUCT
+USING PERIODIC COMMIT
+LOAD CSV WITH HEADERS FROM "file:product.csv" AS row
+CREATE (:Product {companyName: row.CompanyName, customerID: row.CustomerID, fax: row.Fax, phone: row.Phone});
+
+// Create CLAIMS
+USING PERIODIC COMMIT
+LOAD CSV WITH HEADERS FROM "file:claims.csv" AS row
+CREATE (:Claims {companyName: row.CompanyName, customerID: row.CustomerID, fax: row.Fax, phone: row.Phone});
