@@ -2,6 +2,7 @@ import dataset
 import csv
 import pprint
 import argparse
+from stuf import stuf
 
 
 def csv_to_dict(csv_file):
@@ -11,6 +12,7 @@ def csv_to_dict(csv_file):
              for row in csv.DictReader(f)]
     return list_of_dicts
 
+#Update existing database table
 def store_in_db(db, dict_data, table_name):
     # connecting to a SQLite database
     #db = dataset.connect('sqlite:///{}'.format(db_name))
@@ -18,6 +20,16 @@ def store_in_db(db, dict_data, table_name):
     for row in dict_data:
         table.insert(row)
     print("Added {} rows to table {}".format(len(dict_data), table_name))
+
+# Return data from table
+def read_from_db(db, table_name):
+    my_table = db[table_name].all()
+    table_data = []
+
+    for row in my_table:
+        table_data.append(row)
+
+    return table_data
 
 def clear_table(db, table_name):
     result = db.query('DROP TABLE IF EXISTS '+ table_name)
@@ -36,16 +48,18 @@ def main():
     clear_db = args.clear_db
 
     table_csv_dict = csv_to_dict(input_file)
-    pprint.pprint(table_csv_dict)
 
     #Open Database
-    db = dataset.connect('sqlite:///AutoInsurace.db')
+    db = dataset.connect('sqlite:///AutoInsurace.db', row_type=stuf)
 
     #Drop and create table
     if clear_db:
         clear_table(db, table_name)
 
     store_in_db(db, table_csv_dict, table_name)
+
+    contents = read_from_db(db, table_name)
+    pprint.pprint(contents)
 
 
 #####################
