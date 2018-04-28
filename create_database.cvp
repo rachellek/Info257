@@ -2,7 +2,8 @@
 // Create CUSTOMER
 USING PERIODIC COMMIT
 LOAD CSV WITH HEADERS FROM "https://github.com/rachellek/Info257/blob/master/Data/customer.csv" AS row
-CREATE (:Customer {CustomerID: row.CustomerID, Address: row.Address, Name: row.Name, PrimaryNo: row.PrimaryNo, CustomerDt:row.CustomerDt});
+CREATE (:Customer {CustomerID: row.CustomerID, Address: row.Address, Name: row.Name, PrimaryNo: row.PrimaryNo, CustomerDt:row.CustomerDt, CarID: row.CarID});
+
 
 // Create CAR
 USING PERIODIC COMMIT

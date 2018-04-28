@@ -1,2 +1,2 @@
-Field Name,CustomerID,Address,Name,PrimaryNo,CustomerDt
-Example,100420,"1155 Red Road, Berkeley,CA",John Doe,4356925203,1/19/2001
+Field Name,CustomerID,Address,Name,PrimaryNo,CustomerDt,CarID
+Example,100420,"1155 Red Road, Berkeley,CA",John Doe,4356925203,1/19/2001,10000
