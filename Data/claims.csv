@@ -1,2 +1,2 @@
-ClaimEvidence,ClaimStatus,ClaimID,ClaimDescription
-.JPG file location,Approved,58201,Car damaged in back.
+ClaimEvidence,ClaimStatus,ClaimID,ClaimDescription,CustomerID,FraudInd
+.JPG file location,Approved,58201,Car damaged in back.,100420,0
