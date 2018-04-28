@@ -13,9 +13,6 @@ logging.basicConfig(
 
 # Define MainHandler to render the web
 class MainHandler(tornado.web.RequestHandler):
-    def init(self, logger):
-        self.logger = logger
-
     def get(self):
         self.render("index.html")
 
@@ -28,7 +25,7 @@ if __name__ == "__main__":
 
     app = tornado.web.Application(
         [
-            (r"/", MainHandler, dict(logger=logger))
+            (r"/", MainHandler)
         ],
         template_path=os.path.join(os.path.dirname(__file__), "templates"),
         static_path=os.path.join(os.path.dirname(__file__), "static")
