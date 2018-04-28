@@ -1,31 +1,42 @@
+CREATE CONSTRAINT ON (c.Customer) ASSERT c.CustomerID IS UNIQUE;
+CREATE CONSTRAINT ON (c.Customer) ASSERT c.CustomerID IS UNIQUE;
+
+CREATE CONSTRAINT ON (c.Car) ASSERT c.CarID IS UNIQUE;
+
+
 
 // Create CUSTOMER
 USING PERIODIC COMMIT
-LOAD CSV WITH HEADERS FROM "https://github.com/rachellek/Info257/blob/master/Data/customer.csv" AS row
-CREATE (:Customer {CustomerID: row.CustomerID, Address: row.Address, Name: row.Name, PrimaryNo: row.PrimaryNo, CustomerDt:row.CustomerDt, CarID: row.CarID});
-
+LOAD CSV WITH HEADERS FROM "https://raw.githubusercontent.com/rachellek/Info257/master/Data/customer.csv" AS row
+CREATE (:Customer {CustomerID: row.CustomerID, Address: row.Address, Name: row.Name, PrimaryNo: row.PrimaryNo, CustomerDt:row.CustomerDt, CarID: row.CarID})
+as line
+RETURN line
+LIMIT 5
+;
 
 // Create CAR
 USING PERIODIC COMMIT
-LOAD CSV WITH HEADERS FROM "https://github.com/rachellek/Info257/blob/master/Data/car.csv" AS row
-CREATE (:Car {CarID: row.CarID, Make: row.Make, Year: row.Year, Model: row.Model, BookValue: row.BookValue});
+LOAD CSV WITH HEADERS FROM "https://raw.githubusercontent.com/rachellek/Info257/master/Data/car.csv" AS row
+MATCH (:Car {CarID: row.CarID, Make: row.Make, Year: row.Year, Model: row.Model, BookValue: row.BookValue});
+
+
 
 // Create HOUSEHOLD
 USING PERIODIC COMMIT
-LOAD CSV WITH HEADERS FROM "https://github.com/rachellek/Info257/blob/master/Data/household.csv" AS row
+LOAD CSV WITH HEADERS FROM "https://raw.githubusercontent.com/rachellek/Info257/master/Data/household.csv" AS row
 CREATE (:Household {HouseholdID: row.HouseholdID, SecondaryCustomer: row.SecondaryCustomer});
 
 // Create BILLING
 USING PERIODIC COMMIT
-LOAD CSV WITH HEADERS FROM "https://github.com/rachellek/Info257/blob/master/Data/billing.csv" AS row
+LOAD CSV WITH HEADERS FROM "https://raw.githubusercontent.com/rachellek/Info257/master/Data/billing.csv" AS row
 CREATE (:Billing {MonthlyFee:row.MonthlyFee,  TotalPaid: row.FirstName, Invoice: row.Invoice});
 
 // Create PRODUCT
 USING PERIODIC COMMIT
-LOAD CSV WITH HEADERS FROM "https://github.com/rachellek/Info257/blob/master/Data/product.csv" AS row
+LOAD CSV WITH HEADERS FROM "https://raw.githubusercontent.com/rachellek/Info257/master/Data/product.csv" AS row
 CREATE (:Product {ProductID: row.ProductID, InsurancePlan: row.InsurancePlan, InsuranceDetails: row.InsuranceDetails});
 
 // Create CLAIMS
 USING PERIODIC COMMIT
-LOAD CSV WITH HEADERS FROM "https://github.com/rachellek/Info257/blob/master/Data/claims.csv" AS row
+LOAD CSV WITH HEADERS FROM "https://raw.githubusercontent.com/rachellek/Info257/master/Data//claims.csv" AS row
 CREATE (:Claims {ClaimEvidence: row.ClaimEvidence, ClaimStatus: row.ClaimStatus, ClaimID: row.ClaimID, ClaimDescription: row.ClaimDescription});
