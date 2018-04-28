@@ -30,28 +30,27 @@
         <h1 class="h3 mb-3 font-weight-normal">Submit Claim</h1>
       </div>
 
-      <div class="form-label-group">
-        <!-- <input type="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
-        <label for="inputEmail">Email address</label> -->
-        <select class="selectpicker" data-live-search="true" title="Choose policy holder">
+      <div class="form-group">
+        <label for="claim_customer">Customer</label>
+        <select class="selectpicker form-control" id="claim_customer" title="Select customer">
           <option>Nic</option>
           <option>Rachelle</option>
           <option>Adam</option>
         </select>
       </div>
 
-      <div class="form-label-group">
-        <input type="password" id="inputPassword" class="form-control" placeholder="Password" required>
-        <label for="inputPassword">Password</label>
+      <div class="form-group">
+        <label for="claim_vehicle">Vehicle</label>
+        <select class="selectpicker form-control" id="claim_vehicle" title="Select vehicle for claim">
+        </select>
       </div>
 
-      <div class="checkbox mb-3">
-        <label>
-          <input type="checkbox" value="remember-me"> Remember me
-        </label>
+      <div class="form-group">
+        <label for="claim_description">Claim Description</label>
+        <textarea class="form-control" id="claim_description" rows="3"></textarea>
       </div>
-      <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
-      <p class="mt-5 mb-3 text-muted text-center">&copy; 2017-2018</p>
+
+      <button class="btn btn-lg btn-primary btn-block" type="submit">Submit</button>
     </form>
   </body>
 
