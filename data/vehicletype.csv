@@ -1,2 +1,11 @@
 VehicleTypeID,Make,Year,Model,BookValue,ImageURL
-10000,Tesla,2013,3,10000,
+2000,Tesla,2013,3,35000,http://www.24nova.com/electric/2013-tesla-model-s-p85-75000_i3
+3500,Honda,2008,Civic,20000,https://www.autoblog.com/buy/2008-Honda-Civic/
+5000,Ford,2011,Fusion,25000,https://www.cars.com/research/ford-fusion-2011/
+4550,Chevy,2018,Volt,34000,http://www.motortrend.com/cars/chevrolet/volt/2018/
+1000,Toyota,2017,Corolla,10000,https://www.cars.com/research/toyota-corolla-2017/
+2500,Ford,2005,F150,26000,https://www.ford.com/trucks/f150/models/f150-xl/
+6200,Jaguar,2016,F-Type,55000,http://www.motortrend.com/cars/jaguar/f-type/2016/
+7500,BMW,2006,i3,40000,http://masbukti.com/bmw/bmw-i3/2006-bmw-i3/13
+8000,Porsche,2007,911,80000,http://www.motortrend.com/cars/porsche/911/2007/2007-porsche-911-gt3-2-2/
+9500,Lincoln,2009,MKZ,35000,http://www.motortrend.com/cars/lincoln/mkz/2009/

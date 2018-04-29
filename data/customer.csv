@@ -1,3 +1,28 @@
 CustomerID,Address,Name,PrimaryNo,ContractDt,Premium,RiskScore,PolicyID
-100420,"1155 Red Road, Berkeley,CA",John Doe,4356925203,1/1/2001,800,1,100
-100421,"1 Lombard str. San Francisco, CA 94133",Sarah Smith,5555555555,4/28/2018,1200,1,200
+100420,"1155 Red Road, Berkeley,CA",John Doe,4356925203,1/1/2001,500,0,3500
+100421,"1 Lombard str. San Francisco, CA 94133",Sarah Smith,5555555555,4/28/2018,1200,0,1820
+100422,1001 Oakdale Street,Amy Apple,6458837478,3/21/2011,900,0,2840
+100423,"3217 Garnet Dr, San Jose, CA 95117",Betsy Butterfly,7474849021,4/13/2004,690,0,3500
+100446,"813 Carsten Cir,Benicia, CA 94510",Cassie Carrot,7389504923,10/9/2013,950,0,2840
+100424,"320 Cavanaugh St, San Mateo, CA 94401",Diana Daisy,4638591022,9/12/2012,840,0,2840
+100425,"6466 Hollis St UNIT 205, Emeryville, CA 94608",Ellie Elephant,4651029473,8/15/2017,1050,0,2840
+100426,"573 San Dimas St,Fairfield, CA 94533",Fiona Fairy,1982346281,6/17/2010,850,0,3500
+100427,"1036 Obrien Ct,San Jose, CA 95126",Irvine Igloo,9302750210,5/12/2003,680,0,3500
+100428,"13220 Garden Bar Rd,Grass Valley, CA 95949",Jasmine Ding,4840819018,6/23/2015,980,0,1820
+100429,"162 Smith Flat Rd,Angels Camp, CA 95222",Katie Kangaroo,3910371201,5/22/2004,650,0,3500
+100430,"756 Rand St, San Mateo, CA 94401",Laura Lemon,7598482921,7/28/2008,730,0,2840
+100431,"7730 Sierra Dr,Granite Bay, CA 95746",Marie Mariott,9103810384,5/23/2006,550,0,3500
+100432,"1804 Jasmine Ct,San Jacinto, CA 92583",Nate Norway,4592028104,7/14/2008,750,0,2840
+100433,"892 Persimmon Ave, Sunnyvale, CA 94087",Octavia Orange,9101849583,12/14/2015,1100,0,1820
+100434,"55 Otsego Ave, San Francisco, CA 94112",Percy Porcupine,5920183020,9/24/2002,550,0,3500
+100435,"21261 Pinebluff Dr,Trabuco Canyon, CA 92679",Quinta Roberts,2992038194,11/4/2011,890,0,2840
+100436,"16376 Creekside Pl,La Mirada, CA 90638",Rosie Riveter,1940840294,3/13/2008,780,0,2840
+100437,"12992 Azusa Cir,Santa Ana, CA 92705",Susan Silver,5104810193,4/16/2009,832,0,2840
+100438,"30512 N Hampton Rd,Laguna Niguel, CA 92677",Tim Tulip,7949103802,1/19/2000,200,0,3500
+100439,"8293 Santa Vista Rd, San Jose, CA",Violet Vinaigrette,5015920482,5/26/2016,940,0,2840
+100440,"9104 College Ave, Berkeley, CA",Winston Window,3921840184,7/20/2002,250,0,3500
+100441,"1901 Vista Isle, Santa Cruz, CA",Zayn Zebra,8018592011,4/13/2007,600,0,3500
+100442,"29481 Corte Mary, Cupertino, CA",Gabby Schmidt,4058201048,8/20/2003,350,0,3500
+100443,"21048 Bank Road, San Francisco, CA",Jenna Rose,8919384928,4/21/2015,820,0,2840
+100444,"3312 Vista Del Mundo,Camino, CA 95709",Gertrude Giraffe,4650193526,2/17/1996,200,0,3500
+100445,"1744 Monticello Rd, San Mateo, CA 94402",Harry Potter,4820149201,1/15/2002,620,0,3500
