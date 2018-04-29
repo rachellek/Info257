@@ -73,4 +73,6 @@ $(document).ready(function() {
     });
   });
 
+  $('#claim_report_modal').modal('show');
+
 });

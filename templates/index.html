@@ -80,7 +80,60 @@
             </button>
           </div>
           <div class="modal-body">
-            <p>This report summarizes the results of claim number: <span id="report_claimid"></span></p>
+            <h3><span id="report_customer_name">Rachelle Kresch</span></h3>
+            <p>
+              <b>Customer ID</b>: 1403403<br />
+              <b>Policy Details</b>: <span id="report_policy_details">Some text about the policy</span><br />
+              <b>Premium</b>: $<span id="report_policy_deductable">1000</span> per year<br />
+              <b>Deductable</b>: $<span id="report_policy_deductable">1000</span><br />
+              <b>Number of Vehicles</b>: <span id="report_customer_num_vehicles">2</span><br />
+              <b>Risk Score</b>: <span id="report_customer_risk_score">1.0</span>
+            </p>
+
+
+            <div class="bd-callout bd-callout-warning">
+              <div class="row">
+                <div class="col-md-6">
+                  <h4>Claim: 1352345</h4>
+                  <p><b>Description</b>: This is a claim description. There was an accident and I wrote some text about it after the accident that describes how the insurance company should cover some of the cost of the repairs. Some people died and there was a lot of blood but the car is only a little bit damaged. Seems fine right? Yea that totally seems reasonable for a description of the accident claim.</p>
+                  <p><b>Estimated Cost to Repair</b>: $5000</p>
+                </div>
+                <div class="col-md-6">
+                  <div class="card bg-light mb-3">
+                    <div class="card-header"><span id="report_claim_vehicle_name">Toyota Camry</span></div>
+                    <img class="card-img-top" id="report_claim_vehicle_image_url" src="http://st.motortrend.com/uploads/sites/10/2016/07/2017-toyota-camry-se-hybrid-sedan-angular-front.png" alt="Card image cap">
+                    <div class="card-body">
+                      <p class="card-text">
+                        <b>Year</b>: <span id="report_claim_vehicle_year">2015</span><br />
+                        <b>Value</b>: $<span id="report_claim_vehicle_value">10000</span>
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="bd-callout bd-callout-info">
+              <h5>Cost Summary</h5>
+              <p>
+                <b>Covered Repair Value</b>: $4500<br />
+                <b>Out of Pocket Expense For Claim</b>: $500<br />
+                <b>Existing Claims Toward Deductable</b>: $500<br />
+                <b>Remaining Deductable Value</b>: $0
+              </p>
+              <h5>Risk Score</h5>
+              <p>A risk score associated with the customer's policy is calculated using all available claim data for that policy. We have determined that your policy risk score has been updated to <span id="report_claim_new_risk_score">2.4</span>.</p>
+              <div class="alert alert-success" role="alert">
+                Congratulations, we covered $4500 of the cost of repairs!
+              </div>
+              <div class="alert alert-info" role="alert">
+                Your premium has not increased.
+              </div>
+              <div class="alert alert-danger" role="alert">
+                Unfortunately, due to an increase in risk score, your premium has now increased to $2000.
+              </div>
+            </div>
+
+
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Dismiss</button>
