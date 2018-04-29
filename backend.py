@@ -52,7 +52,7 @@ def generate_report(db, input_data):
     report_data['deductible'] = policy_info[0]['Deductible']
     report_data['premium'] = customer_info[0]['Premium']
     report_data['customer_number_of_vehicles'] = num_vehicles
-    report_data['customer_risk_score'] = customer_info[0]['']
+    report_data['customer_risk_score'] = customer_info[0]['RiskScore']
     report_data['claim_id'] = input_data['ClaimID']
     report_data['claim_description'] = claim_info[0]['ClaimDescription']
     report_data['claim_cost_to_repair'] = 5000
