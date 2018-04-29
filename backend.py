@@ -8,9 +8,14 @@ import database_helpers
 def premium_change(db, CustomerID):
     claims = list(db.query("Select * from claims WHERE CustomerID==" + CustomerID))
 
-    New_RiskScore = (sum(1 if float(claim['Severity']) == 1 else 0 for claim in claims) *.5 + \
-    sum(1 if float(claim['Severity']) == 2 else 0 for claim in claims) *.7 + \
-    sum(1 if float(claim['Severity']) == 3 else 0 for claim in claims) *.9)
+    New_RiskScore = ( \
+    sum(1 if float(claim['Severity']) == 0 else 0 for claim in claims) *.3 + \
+    sum(1 if float(claim['Severity']) == 1 else 0 for claim in claims) *.4 + \
+    sum(1 if float(claim['Severity']) == 2 else 0 for claim in claims) *.5 + \
+    sum(1 if float(claim['Severity']) == 3 else 0 for claim in claims) *.7 + \
+    sum(1 if float(claim['Severity']) == 5 else 0 for claim in claims) *.9 + \
+    sum(1 if float(claim['Severity']) == 5 else 0 for claim in claims) *1.2)
+
     print("Customer new Risk Score {}".format(New_RiskScore))
 
     RiskScore = float(list(db.query("Select RiskScore from customer WHERE CustomerID==" + CustomerID))[0]['RiskScore'])
@@ -19,11 +24,33 @@ def premium_change(db, CustomerID):
 
     if New_RiskScore > (RiskScore * 1.5):
         print("The customer's premium has increased")
-        dict_data = [dict(CustomerID=CustomerID, RiskScore=New_RiskScore)]
-        database_helpers.update_table(db, dict_data, "customer", ['CustomerID'])
+        #dict_data = [dict(CustomerID=CustomerID, RiskScore=New_RiskScore)]
+        #database_helpers.update_table(db, dict_data, "customer", ['CustomerID'])
+        return New_RiskScore
 
     else:
         print("The customer's premium has not changed")
+        return RiskScore
+
+def claim_cost_to_repair(Severity, BookValue):
+    claim_cost_to_repair = []
+
+    if Severity == 0:
+        claim_cost_to_repair = BookValue * .2
+    if Severity == 1:
+        claim_cost_to_repair = BookValue * .3
+    if Severity == 2:
+        claim_cost_to_repair = BookValue * .3
+    if Severity == 3:
+        claim_cost_to_repair = BookValue * .5
+    if Severity == 4:
+        claim_cost_to_repair = BookValue * .8
+    if Severity == 5:
+        claim_cost_to_repair = BookValue * 1
+
+    print("The cost to repair is {} for a car worth {}".format(claim_cost_to_repair, BookValue))
+    return claim_cost_to_repair
+
 
 
 def generate_report(db, input_data):
@@ -58,3 +85,4 @@ def generate_report(db, input_data):
 if __name__ == "__main__":
     db = dataset.connect('sqlite:///AutoInsurace.db', row_type=stuf)
     premium_change(db, "100420")
+    claim_cost_to_repair(1, 7000)
