@@ -52,7 +52,6 @@ def claim_cost_to_repair(Severity, BookValue):
     return claim_cost_to_repair
 
 
-
 def generate_report(db, input_data):
     # query database to gather all of the info we need to make calculations for the report
     # get customer info from table
@@ -68,6 +67,9 @@ def generate_report(db, input_data):
 
     # call helper calculation functions to compute all of the new numbers
     #...
+    print(customer_info)
+    print(vehicle_type_info)
+    customer_claim_cost_to_repair = claim_cost_to_repair(claim_info[0]["Severity"], vehicle_type_info[0]["BookValue"])
 
     # populate output data structure to send to front end
     report_data = {}
@@ -80,7 +82,7 @@ def generate_report(db, input_data):
     report_data['customer_risk_score'] = 1.0
     report_data['claim_id'] = 10024
     report_data['claim_description'] = "This is some text"
-    report_data['claim_cost_to_repair'] = 5000
+    report_data['claim_cost_to_repair'] = customer_claim_cost_to_repair
     report_data['claim_vehicle_make_model'] = "Toyota Camry"
     report_data['claim_vehicle_year'] = 2015
     report_data['claim_vehicle_image_url'] = "http://st.motortrend.com/uploads/sites/10/2016/07/2017-toyota-camry-se-hybrid-sedan-angular-front.png"
