@@ -11,6 +11,7 @@ import tornado.web
 import os
 
 import database_helpers
+import backend
 
 logging.basicConfig(
     format="[%(asctime)s][%(name)s](%(levelname)s) %(message)s", level=logging.INFO)
@@ -45,8 +46,10 @@ class ClaimSubmitHandler(tornado.web.RequestHandler):
         self.logger = logger
     def post(self):
         data = tornado.escape.json_decode(self.request.body)
-        database_helpers.append_table(self.db, [data], "claims")
-        self.logger.info("Added claim: {}".format(data))
+        keys = database_helpers.append_table(self.db, [data], "claims")
+        self.logger.info("Added claim id {} | {}".format(keys[0], data))
+        # since the db assigns the claim id, append it to our package for report generation
+        data['ClaimID'] = keys[0]
         report_data = backend.generate_report(self.db, data)
         self.write(json.dumps({"status": "success", "report": report_data}))
 

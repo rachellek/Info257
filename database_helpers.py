@@ -24,9 +24,12 @@ def csv_to_dict(csv_file):
 # append existing database table
 def append_table(db, dict_data, table_name):
     table = db[table_name]
+    primary_keys = []
     for row in dict_data:
-        table.insert(row)
+        key = table.insert(row)
+        primary_keys.append(key)
     logger.info("Added {} rows to table {}".format(len(dict_data), table_name))
+    return primary_keys
 
 # Update existing database table
 def update_table(db, dict_data, table_name, matching_column):
