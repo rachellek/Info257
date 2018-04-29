@@ -3,7 +3,16 @@ import csv
 import pprint
 import argparse
 from stuf import stuf
+import logging
 
+logging.basicConfig(
+    format="[%(asctime)s][%(name)s](%(levelname)s) %(message)s", level=logging.INFO)
+
+logger = logging.getLogger("database")
+
+def open_db(db_name):
+    logger.info("Opening database: {}".format(db_name))
+    return dataset.connect('sqlite:///{}'.format(db_name), row_type=stuf)
 
 def csv_to_dict(csv_file):
     list_of_dicts = []
@@ -12,17 +21,17 @@ def csv_to_dict(csv_file):
              for row in csv.DictReader(f)]
     return list_of_dicts
 
-#Update existing database table
-def store_in_db(db, dict_data, table_name):
+# Update existing database table
+def update_table(db, dict_data, table_name):
     # connecting to a SQLite database
     #db = dataset.connect('sqlite:///{}'.format(db_name))
     table = db[table_name]
     for row in dict_data:
         table.insert(row)
-    print("Added {} rows to table {}".format(len(dict_data), table_name))
+    logger.info("Added {} rows to table {}".format(len(dict_data), table_name))
 
 # Return data from table
-def read_from_db(db, table_name):
+def read_table(db, table_name):
     my_table = db[table_name].all()
     table_data = []
 
@@ -33,9 +42,13 @@ def read_from_db(db, table_name):
 
 def clear_table(db, table_name):
     result = db.query('DROP TABLE IF EXISTS '+ table_name)
-    print("Drop table {}".format(table_name))
+    logger.info("Dropping table {}".format(table_name))
 
-#Define main function with command line args
+def query_table_by_value(db, table_name, key, value):
+    table = db[table_name]
+    return table.find(search_key=search_value)
+
+# Define main function with command line args
 def main():
     parser = argparse.ArgumentParser(description='Initiate DB')
     parser.add_argument('--input_file', '-i', required=True, help='Path and filename where input data is stored')
@@ -56,9 +69,9 @@ def main():
     if clear_db:
         clear_table(db, table_name)
 
-    store_in_db(db, table_csv_dict, table_name)
+    update_table(db, table_csv_dict, table_name)
 
-    contents = read_from_db(db, table_name)
+    contents = read_table(db, table_name)
     pprint.pprint(contents)
 
 
