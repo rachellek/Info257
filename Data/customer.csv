@@ -1,3 +1,3 @@
-CustomerID,Address,Name,PrimaryNo,ContractDt,CarID
-100420,"1155 Red Road, Berkeley,CA",John Doe,4356925203,1/1/2001,10000
-100421,"1 Lombard str. San Francisco, CA 94133",Sarah Smith,5555555555,4/28/2018,20000
+CustomerID,Address,Name,PrimaryNo,ContractDt,CarID,Household
+100420,"1155 Red Road, Berkeley,CA",John Doe,4356925203,1/1/2001,10000,405021
+100421,"1 Lombard str. San Francisco, CA 94133",Sarah Smith,5555555555,4/28/2018,20000,
