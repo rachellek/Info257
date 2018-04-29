@@ -38,7 +38,19 @@
 
       <div class="form-group">
         <label for="claim_vehicle">Vehicle</label>
-        <select class="selectpicker form-control" id="claim_vehicle" title="Select vehicle for claim"></select>
+        <select class="selectpicker form-control" id="claim_vehicle"></select>
+      </div>
+
+      <div class="form-group">
+        <label for="claim_severity">Claim Severity</label>
+        <select class="selectpicker form-control" id="claim_severity">
+          <option value="0">Level 0: Is that a scratch?</option>
+          <option value="1">Level 1: Little bump</option>
+          <option value="2">Level 2: Not looking pretty</option>
+          <option value="3">Level 3: This looks expensive</option>
+          <option value="4">Level 4: Parts of the vehicle are missing</option>
+          <option value="5">Level 5: Complete yard sale</option>
+        </select>
       </div>
 
       <div class="form-group">
