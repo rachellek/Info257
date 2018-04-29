@@ -38,26 +38,28 @@ def generate_report(db, input_data):
     vehicle_type_info = database_helpers.query_table_by_value(db, "vehicletype", "VehicleTypeID", vehicle_info[0]['VehicleTypeID'])
     # get policy info from table (assumes one element in customer_info)
     policy_info = database_helpers.query_table_by_value(db, "policy", "PolicyID", customer_info[0]['PolicyID'])
+    # find number of vehicles for customer id
+    num_vehicles = len(database_helpers.query_table_by_value(db, "vehicle", "CustomerID", input_data['CustomerID']))
 
     # call helper calculation functions to compute all of the new numbers
     #...
 
     # populate output data structure to send to front end
     report_data = {}
-    report_data['customer_name'] = "Rachelle Kresch"
-    report_data['customer_id'] = input_data['CustomerID']
-    report_data['policy_details'] = "Some text about the policy"
-    report_data['deductible'] = "1000"
-    report_data['premium'] = "1000"
-    report_data['customer_number_of_vehicles'] = 2
-    report_data['customer_risk_score'] = 1.0
-    report_data['claim_id'] = 10024
-    report_data['claim_description'] = "This is some text"
+    report_data['customer_name'] = customer_info[0]['Name']
+    report_data['customer_id'] = customer_info[0]['CustomerID']
+    report_data['policy_details'] = policy_info[0]['PolicyDetails']
+    report_data['deductible'] = policy_info[0]['Deductible']
+    report_data['premium'] = customer_info[0]['Premium']
+    report_data['customer_number_of_vehicles'] = num_vehicles
+    report_data['customer_risk_score'] = customer_info[0]['']
+    report_data['claim_id'] = input_data['ClaimID']
+    report_data['claim_description'] = claim_info[0]['ClaimDescription']
     report_data['claim_cost_to_repair'] = 5000
-    report_data['claim_vehicle_make_model'] = "Toyota Camry"
-    report_data['claim_vehicle_year'] = 2015
-    report_data['claim_vehicle_image_url'] = "http://st.motortrend.com/uploads/sites/10/2016/07/2017-toyota-camry-se-hybrid-sedan-angular-front.png"
-    report_data['claim_vehicle_value'] = 10000
+    report_data['claim_vehicle_make_model'] = "{} {}".format(vehicle_type_info[0]['Make'], vehicle_type_info[0]['Model'])
+    report_data['claim_vehicle_year'] = vehicle_type_info[0]['Year']
+    report_data['claim_vehicle_image_url'] = vehicle_type_info[0]['ImageURL']
+    report_data['claim_vehicle_value'] = vehicle_type_info[0]['BookValue']
     report_data['claim_covered_repair_value'] = 4500
     report_data['claim_out_of_pocket_expense'] = 500
     report_data['claim_deductible_contributions'] = 500
