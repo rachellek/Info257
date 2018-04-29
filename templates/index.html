@@ -26,7 +26,7 @@
   </head>
 
   <body>
-    <form class="form-signin">
+    <div class="form-signin">
       <div class="text-center mb-4">
         <h1 class="h3 mb-3 font-weight-normal">Submit Claim</h1>
       </div>
@@ -58,8 +58,37 @@
         <textarea class="form-control" id="claim_description" rows="3"></textarea>
       </div>
 
-      <button class="btn btn-lg btn-primary btn-block" type="submit">Submit</button>
-    </form>
+      <div class="form-group">
+        <button class="btn btn-lg btn-primary btn-block" id="claim_submit">Submit</button>
+      </div>
+
+      <div class="alert alert-danger" id="claim_submit_alert" role="alert" style="display: none;">
+        <span id="claim_submit_alert_content"></span>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+    </div>
+
+    <div class="modal fade bd-example-modal-lg" id="claim_report_modal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Claim Processing Report</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <p>This report summarizes the results of claim number: <span id="report_claimid"></span></p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Dismiss</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
   </body>
 
 </html>

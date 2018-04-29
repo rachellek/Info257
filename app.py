@@ -20,7 +20,6 @@ class MainHandler(tornado.web.RequestHandler):
     def get(self):
         self.render("index.html")
 
-
 class CustomersHandler(tornado.web.RequestHandler):
     def initialize(self, database):
         self.db = database
@@ -40,6 +39,16 @@ class VehiclesByCustomerIdHandler(tornado.web.RequestHandler):
         # returns list of tuples containing vehicle and vehicletype
         self.write(json.dumps(out))
 
+class ClaimSubmitHandler(tornado.web.RequestHandler):
+    def initialize(self, database, logger):
+        self.db = database
+        self.logger = logger
+    def post(self):
+        data = tornado.escape.json_decode(self.request.body)
+        database_helpers.update_table(self.db, [data], "claims")
+        self.logger.info("Added claim: {}".format(data))
+        self.write(json.dumps({"status": "success"}))
+
 # Create my app
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
@@ -56,7 +65,8 @@ if __name__ == "__main__":
         [
             (r"/", MainHandler),
             (r"/customers", CustomersHandler, dict(database=db)),
-            (r"/vehicles/bycustomer/([0-9]+)", VehiclesByCustomerIdHandler, dict(database=db))
+            (r"/vehicles/bycustomer/([0-9]+)", VehiclesByCustomerIdHandler, dict(database=db)),
+            (r"/claims/submit", ClaimSubmitHandler, dict(database=db, logger=logger))
         ],
         template_path=os.path.join(os.path.dirname(__file__), "templates"),
         static_path=os.path.join(os.path.dirname(__file__), "static")
