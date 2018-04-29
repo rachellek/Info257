@@ -29,8 +29,8 @@ $(document).ready(function() {
       success : function(data) {              
           $.each(data, function() {
             $('#claim_vehicle').append($('<option>', { 
-              value: this['VehicleID'],
-              text : this['VehicleID']
+              value: this[0]['VehicleID'],
+              text : this[1]['Year'] + " " + this[1]['Make'] + " " + this[1]['Model']
             }));
             $('#claim_vehicle').selectpicker('refresh');
           });

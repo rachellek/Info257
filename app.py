@@ -24,7 +24,6 @@ class MainHandler(tornado.web.RequestHandler):
 class CustomersHandler(tornado.web.RequestHandler):
     def initialize(self, database):
         self.db = database
-    
     def get(self):
         customers = database_helpers.read_table(self.db, "customer")
         self.write(json.dumps(customers))
@@ -32,10 +31,14 @@ class CustomersHandler(tornado.web.RequestHandler):
 class VehiclesByCustomerIdHandler(tornado.web.RequestHandler):
     def initialize(self, database):
         self.db = database
-
     def get(self, customer_id):
         vehicles = database_helpers.query_table_by_value(self.db, "vehicle", "CustomerID", customer_id)
-        self.write(json.dumps(vehicles))
+        out = []
+        for v in vehicles:
+            vehicle_type = database_helpers.query_table_by_value(self.db, "vehicletype", "VehicleTypeID", v['VehicleTypeID'])
+            out.append((v, vehicle_type[0]))
+        # returns list of tuples containing vehicle and vehicletype
+        self.write(json.dumps(out))
 
 # Create my app
 if __name__ == "__main__":
