@@ -11,7 +11,6 @@ $(document).ready(function() {
             text : this['Name']
           }));
           $('#claim_customer').selectpicker('refresh');
-          $('#claim_customer').val(1);
         });
     },
     error : function(request,error)
@@ -20,5 +19,28 @@ $(document).ready(function() {
     }
   });
 
+
+  $("#claim_customer").on("changed.bs.select", function(e, clickedIndex, newValue, oldValue) {
+    
+    $.ajax({
+      url : 'http://localhost:8888/vehicles/bycustomer/' + this.value,
+      type : 'GET',
+      dataType:'json',
+      success : function(data) {              
+          $.each(data, function() {
+            $('#claim_vehicle').append($('<option>', { 
+              value: this['VehicleID'],
+              text : this['VehicleID']
+            }));
+            $('#claim_vehicle').selectpicker('refresh');
+          });
+      },
+      error : function(request,error)
+      {
+          alert("Request: "+JSON.stringify(request));
+      }
+    });
+
+  });
 
 });

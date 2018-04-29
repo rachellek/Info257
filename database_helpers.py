@@ -32,12 +32,10 @@ def update_table(db, dict_data, table_name):
 
 # Return data from table
 def read_table(db, table_name):
-    my_table = db[table_name].all()
+    query_result = db[table_name].all()
     table_data = []
-
-    for row in my_table:
+    for row in query_result:
         table_data.append(row)
-
     return table_data
 
 def clear_table(db, table_name):
@@ -46,7 +44,11 @@ def clear_table(db, table_name):
 
 def query_table_by_value(db, table_name, key, value):
     table = db[table_name]
-    return table.find(search_key=search_value)
+    query_result = table.find(**{key: value})
+    table_data = []
+    for row in query_result:
+        table_data.append(row)
+    return table_data
 
 # Define main function with command line args
 def main():

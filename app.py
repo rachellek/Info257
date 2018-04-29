@@ -29,12 +29,12 @@ class CustomersHandler(tornado.web.RequestHandler):
         customers = database_helpers.read_table(self.db, "customer")
         self.write(json.dumps(customers))
 
-class VehiclesByCustomerHandler(tornado.web.RequestHandler):
+class VehiclesByCustomerIdHandler(tornado.web.RequestHandler):
     def initialize(self, database):
         self.db = database
 
-    def get(self, id):
-        database_helpers.query_table_by_value(self.db, "customer_vehicles", )
+    def get(self, customer_id):
+        vehicles = database_helpers.query_table_by_value(self.db, "vehicle", "CustomerID", customer_id)
         self.write(json.dumps(vehicles))
 
 # Create my app
@@ -48,11 +48,12 @@ if __name__ == "__main__":
     # Open the database
     db = database_helpers.open_db(args.db_name)
 
+    # Establish handlers for various db io
     app = tornado.web.Application(
         [
             (r"/", MainHandler),
-            (r"/customers", CustomersHandler, dict(database=db))
-            (r"/vehicles/bycustomer/([0-9]+)", VehiclesByCustomerHandler, dict(database=db))
+            (r"/customers", CustomersHandler, dict(database=db)),
+            (r"/vehicles/bycustomer/([0-9]+)", VehiclesByCustomerIdHandler, dict(database=db))
         ],
         template_path=os.path.join(os.path.dirname(__file__), "templates"),
         static_path=os.path.join(os.path.dirname(__file__), "static")
