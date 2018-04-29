@@ -21,14 +21,19 @@ def csv_to_dict(csv_file):
              for row in csv.DictReader(f)]
     return list_of_dicts
 
-# Update existing database table
-def update_table(db, dict_data, table_name):
-    # connecting to a SQLite database
-    #db = dataset.connect('sqlite:///{}'.format(db_name))
+# append existing database table
+def append_table(db, dict_data, table_name):
     table = db[table_name]
     for row in dict_data:
         table.insert(row)
     logger.info("Added {} rows to table {}".format(len(dict_data), table_name))
+
+# Update existing database table
+def update_table(db, dict_data, table_name, matching_column):
+    table = db[table_name]
+    for row in dict_data:
+        table.update(row, matching_column)
+    logger.info("Updated {} rows in table {}".format(len(dict_data), table_name))
 
 # Return data from table
 def read_table(db, table_name):
@@ -71,7 +76,7 @@ def main():
     if clear_db:
         clear_table(db, table_name)
 
-    update_table(db, table_csv_dict, table_name)
+    append_table(db, table_csv_dict, table_name)
 
     contents = read_table(db, table_name)
     pprint.pprint(contents)

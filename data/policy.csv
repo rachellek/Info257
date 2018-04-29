@@ -1,2 +1,4 @@
 PolicyID,PolicyDetails,Deductible,MaxCoverage
 2840,Standard,2000,100000
+1820,Basic,1000,50000
+3500,Premium,5000,30000

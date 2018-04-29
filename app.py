@@ -45,7 +45,7 @@ class ClaimSubmitHandler(tornado.web.RequestHandler):
         self.logger = logger
     def post(self):
         data = tornado.escape.json_decode(self.request.body)
-        database_helpers.update_table(self.db, [data], "claims")
+        database_helpers.append_table(self.db, [data], "claims")
         self.logger.info("Added claim: {}".format(data))
         self.write(json.dumps({"status": "success"}))
 

@@ -1,3 +1,16 @@
 CustomerID,ClaimDescription,VehicleID,Severity
-100420,Car damaged in back.,10000000,1
-100420,Window broken,10000000,1
+100420,Car damaged in back,10000000,1
+100421,Dented car door,200000,1
+100422,Driver fractured back,250000,2
+100446,Bumper damaged,345000,1
+100423,Driver Paralyzed,222222,4
+100425,Passenger hurt leg,600000,3
+100425,Whiplash,600000,3
+100438,Windshield damage,734000,1
+100438,Stolen laptop inside car,734000,1
+100440,Scratch on car door.,450020,1
+100441,Car totaled.,566000,3
+100442,Jewelry from car stolen,784200,1
+100442,Car front damaged,784200,1
+100432,Whiplash,940000,3
+100433,Death,150000,5
