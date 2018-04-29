@@ -5,7 +5,7 @@ import pprint
 import database_helpers
 
 #Given a new insurance claim, determine whether to increase a customer's premium
-def premium_change(db, CustomerID):
+def risk_score_change(db, CustomerID):
     claims = list(db.query("Select * from claims WHERE CustomerID==" + CustomerID))
 
     New_RiskScore = ( \
@@ -23,17 +23,12 @@ def premium_change(db, CustomerID):
     print("Customer original Risk Score {}".format(RiskScore))
 
     if New_RiskScore > (RiskScore * 1.5):
-        print("The customer's premium has increased")
-        #dict_data = [dict(CustomerID=CustomerID, RiskScore=New_RiskScore)]
-        #database_helpers.update_table(db, dict_data, "customer", ['CustomerID'])
-        return New_RiskScore
-
+        return (True, New_RiskScore)
     else:
-        print("The customer's premium has not changed")
-        return RiskScore
+        return (False, RiskScore)
 
 def claim_cost_to_repair(Severity, BookValue):
-    claim_cost_to_repair = []
+    claim_cost_to_repair = 0
 
     if Severity == 0:
         claim_cost_to_repair = BookValue * .2
@@ -51,6 +46,35 @@ def claim_cost_to_repair(Severity, BookValue):
     print("The cost to repair is {} for a car worth {}".format(claim_cost_to_repair, BookValue))
     return claim_cost_to_repair
 
+def update_premium(db, old_premium, customer_id):
+    # update premium by 20%
+    new_premium = float(old_premium) * 1.2
+    database_helpers.update_table(db, [{"CustomerID": customer_id, "Premium": str(new_premium)}], "customer", "CustomerID")
+    return new_premium
+
+def update_risk_score(db, new_risk_score, customer_id):
+    # update risk score
+    database_helpers.update_table(db, [{"CustomerID": customer_id, "RiskScore": new_risk_score}], "customer", "CustomerID")
+
+def claims_toward_deductible(db, customer_id):
+    claims = database_helpers.query_table_by_value(db, "claims", "CustomerID", customer_id)
+    total_paid = 0
+    for claim in claims:
+        vehicle_id = claim['VehicleID']
+        severity = claim['Severity']
+        vehicle =  database_helpers.query_table_by_value(db, "vehicle", "VehicleID", vehicle_id)[0]
+        vehicle_type_id = vehicle['VehicleTypeID']
+        vehicle_type =  database_helpers.query_table_by_value(db, "vehicletype", "VehicleTypeID", vehicle_type_id)[0]
+        book_value = vehicle_type['BookValue']
+        total_paid += claim_cost_to_repair(int(severity), float(book_value))
+    return total_paid
+
+# TODO RACHELLE ON PLANE
+def coverage(claim_amount, deductible_total, deductible_paid):
+    out_of_pocket = min(claim_amount - deductible_paid, deductible_total)
+    covered = claim_amount - out_of_pocket
+    remaining_deductible = 0
+    return (out_of_pocket, covered, remaining_deductible)
 
 def generate_report(db, input_data):
     # query database to gather all of the info we need to make calculations for the report
@@ -64,39 +88,52 @@ def generate_report(db, input_data):
     vehicle_type_info = database_helpers.query_table_by_value(db, "vehicletype", "VehicleTypeID", vehicle_info[0]['VehicleTypeID'])
     # get policy info from table (assumes one element in customer_info)
     policy_info = database_helpers.query_table_by_value(db, "policy", "PolicyID", customer_info[0]['PolicyID'])
+    # find number of vehicles for customer id
+    num_vehicles = len(database_helpers.query_table_by_value(db, "vehicle", "CustomerID", input_data['CustomerID']))
 
     # call helper calculation functions to compute all of the new numbers
     #...
     print(customer_info)
     print(vehicle_type_info)
-    customer_claim_cost_to_repair = claim_cost_to_repair(claim_info[0]["Severity"], vehicle_type_info[0]["BookValue"])
+    customer_claim_cost_to_repair = claim_cost_to_repair(int(claim_info[0]["Severity"]), float(vehicle_type_info[0]["BookValue"]))
+    new_risk_score = risk_score_change(db, input_data['CustomerID'])
+
+    new_premium = -1
+    if new_risk_score[0]:
+        # update the databases
+        update_risk_score(db, new_risk_score[1], customer_info[0]['CustomerID'])
+        new_premium = update_premium(db, customer_info[0]['Premium'], customer_info[0]['CustomerID'])
+
+    total_paid_into_deductible = claims_toward_deductible(db, customer_info[0]['CustomerID'])
+
+    coverage_values = coverage(float(customer_claim_cost_to_repair), float(policy_info[0]['Deductible']), float(total_paid_into_deductible))
 
     # populate output data structure to send to front end
     report_data = {}
-    report_data['customer_name'] = "Rachelle Kresch"
-    report_data['customer_id'] = input_data['CustomerID']
-    report_data['policy_details'] = "Some text about the policy"
-    report_data['deductible'] = "1000"
-    report_data['premium'] = "1000"
-    report_data['customer_number_of_vehicles'] = 2
-    report_data['customer_risk_score'] = 1.0
-    report_data['claim_id'] = 10024
-    report_data['claim_description'] = "This is some text"
+    report_data['customer_name'] = customer_info[0]['Name']
+    report_data['customer_id'] = customer_info[0]['CustomerID']
+    report_data['policy_details'] = policy_info[0]['PolicyDetails']
+    report_data['deductible'] = policy_info[0]['Deductible']
+    report_data['premium'] = customer_info[0]['Premium']
+    report_data['customer_number_of_vehicles'] = num_vehicles
+    report_data['customer_risk_score'] = customer_info[0]['RiskScore']
+    report_data['claim_id'] = input_data['ClaimID']
+    report_data['claim_description'] = claim_info[0]['ClaimDescription']
     report_data['claim_cost_to_repair'] = customer_claim_cost_to_repair
-    report_data['claim_vehicle_make_model'] = "Toyota Camry"
-    report_data['claim_vehicle_year'] = 2015
-    report_data['claim_vehicle_image_url'] = "http://st.motortrend.com/uploads/sites/10/2016/07/2017-toyota-camry-se-hybrid-sedan-angular-front.png"
-    report_data['claim_vehicle_value'] = 10000
-    report_data['claim_covered_repair_value'] = 4500
-    report_data['claim_out_of_pocket_expense'] = 500
-    report_data['claim_deductible_contributions'] = 500
-    report_data['claim_remaining_deductible'] = 0
-    report_data['claim_new_risk_score'] = 2.4
-    report_data['claim_new_premium'] = 2000
+    report_data['claim_vehicle_make_model'] = "{} {}".format(vehicle_type_info[0]['Make'], vehicle_type_info[0]['Model'])
+    report_data['claim_vehicle_year'] = vehicle_type_info[0]['Year']
+    report_data['claim_vehicle_image_url'] = vehicle_type_info[0]['ImageURL']
+    report_data['claim_vehicle_value'] = vehicle_type_info[0]['BookValue']
+    report_data['claim_out_of_pocket_expense'] = coverage_values[0]
+    report_data['claim_covered_repair_value'] = coverage_values[1]
+    report_data['claim_deductible_contributions'] = total_paid_into_deductible
+    report_data['claim_remaining_deductible'] = coverage_values[2]
+    report_data['claim_new_risk_score'] = new_risk_score[1]
+    report_data['claim_new_premium'] = new_premium
     return report_data
 
 
 if __name__ == "__main__":
     db = dataset.connect('sqlite:///AutoInsurace.db', row_type=stuf)
-    premium_change(db, "100420")
+    risk_score_change(db, "100420")
     claim_cost_to_repair(1, 7000)
