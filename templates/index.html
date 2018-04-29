@@ -82,7 +82,7 @@
           <div class="modal-body">
             <h3><span id="report_customer_name">Rachelle Kresch</span></h3>
             <p>
-              <b>Customer ID</b>: 1403403<br />
+              <b>Customer ID</b>: <span id="report_customer_id">1403403</span><br />
               <b>Policy Details</b>: <span id="report_policy_details">Some text about the policy</span><br />
               <b>Premium</b>: $<span id="report_policy_deductable">1000</span> per year<br />
               <b>Deductable</b>: $<span id="report_policy_deductable">1000</span><br />
@@ -94,13 +94,13 @@
             <div class="bd-callout bd-callout-warning">
               <div class="row">
                 <div class="col-md-6">
-                  <h4>Claim: 1352345</h4>
-                  <p><b>Description</b>: This is a claim description. There was an accident and I wrote some text about it after the accident that describes how the insurance company should cover some of the cost of the repairs. Some people died and there was a lot of blood but the car is only a little bit damaged. Seems fine right? Yea that totally seems reasonable for a description of the accident claim.</p>
-                  <p><b>Estimated Cost to Repair</b>: $5000</p>
+                  <h4>Claim: <span id="report_claim_id">1352345</span></h4>
+                  <p><b>Description</b>: <span id="report_claim_description">This is a claim description. There was an accident and I wrote some text about it after the accident that describes how the insurance company should cover some of the cost of the repairs. Some people died and there was a lot of blood but the car is only a little bit damaged. Seems fine right? Yea that totally seems reasonable for a description of the accident claim.</span></p>
+                  <p><b>Estimated Cost to Repair</b>: $<span id="report_claim_cost_to_repair">5000</span></p>
                 </div>
                 <div class="col-md-6">
                   <div class="card bg-light mb-3">
-                    <div class="card-header"><span id="report_claim_vehicle_name">Toyota Camry</span></div>
+                    <div class="card-header"><span id="report_claim_vehicle_make_model">Toyota Camry</span></div>
                     <img class="card-img-top" id="report_claim_vehicle_image_url" src="http://st.motortrend.com/uploads/sites/10/2016/07/2017-toyota-camry-se-hybrid-sedan-angular-front.png" alt="Card image cap">
                     <div class="card-body">
                       <p class="card-text">
@@ -115,28 +115,24 @@
             <div class="bd-callout bd-callout-info">
               <h5>Cost Summary</h5>
               <p>
-                <b>Covered Repair Value</b>: $4500<br />
-                <b>Out of Pocket Expense For Claim</b>: $500<br />
-                <b>Existing Claims Toward Deductable</b>: $500<br />
-                <b>Remaining Deductable Value</b>: $0
+                <b>Covered Repair Value</b>: $<span id="report_claim_covered_repair_value">4500</span><br />
+                <b>Out of Pocket Expense For Claim</b>: $<span id="report_claim_out_of_pocket_expense">500</span><br />
+                <b>Existing Claims Toward Deductible</b>: $<span id="report_claim_existing_deductible">500</span><br />
+                <b>Remaining Deductible Value</b>: $<span id="report_claim_remaining_deductible">0</span>
               </p>
               <h5>Risk Score</h5>
               <p>A risk score associated with the customer's policy is calculated using all available claim data for that policy. We have determined that your policy risk score has been updated to <span id="report_claim_new_risk_score">2.4</span>.</p>
               <div class="alert alert-success" role="alert">
-                Congratulations, we covered $4500 of the cost of repairs!
+                Congratulations, we covered $<span id="report_claim_covered_repair_value2">4500</span> of the cost of repairs!
               </div>
               <div class="alert alert-info" role="alert">
                 Your premium has not increased.
               </div>
               <div class="alert alert-danger" role="alert">
-                Unfortunately, due to an increase in risk score, your premium has now increased to $2000.
+                Unfortunately, due to an increase in risk score, your premium has now increased to $<span id="report_new_premium">2000</span>.
               </div>
             </div>
 
-
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Dismiss</button>
           </div>
         </div>
       </div>

@@ -47,7 +47,8 @@ class ClaimSubmitHandler(tornado.web.RequestHandler):
         data = tornado.escape.json_decode(self.request.body)
         database_helpers.append_table(self.db, [data], "claims")
         self.logger.info("Added claim: {}".format(data))
-        self.write(json.dumps({"status": "success"}))
+        report_data = backend.generate_report(self.db, data)
+        self.write(json.dumps({"status": "success", "report": report_data}))
 
 # Create my app
 if __name__ == "__main__":

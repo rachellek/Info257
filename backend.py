@@ -25,6 +25,36 @@ def premium_change(db, CustomerID):
     else:
         print("The customer's premium has not changed")
 
+
+def generate_report(db, input_data):
+    # call helper calculation functions to compute all of the new numbers
+    #...
+
+    # populate output data structure to send to front end
+    report_data = {}
+    report_data['customer_name'] = "Rachelle Kresch"
+    report_data['customer_id'] = "1000404"
+    report_data['policy_details'] = "Some text about the policy"
+    report_data['deductible'] = "1000"
+    report_data['premium'] = "1000"
+    report_data['customer_number_of_vehicles'] = 2
+    report_data['customer_risk_score'] = 1.0
+    report_data['claim_id'] = 10024
+    report_data['claim_description'] = "This is some text"
+    report_data['claim_cost_to_repair'] = 5000
+    report_data['claim_vehicle_make_model'] = "Toyota Camry"
+    report_data['claim_vehicle_year'] = 2015
+    report_data['claim_vehicle_image_url'] = "http://st.motortrend.com/uploads/sites/10/2016/07/2017-toyota-camry-se-hybrid-sedan-angular-front.png"
+    report_data['claim_vehicle_value'] = 10000
+    report_data['claim_covered_repair_value'] = 4500
+    report_data['claim_out_of_pocket_expense'] = 500
+    report_data['claim_deductible_contributions'] = 500
+    report_data['claim_remaining_deductible'] = 0
+    report_data['claim_new_risk_score'] = 2.4
+    report_data['claim_new_premium'] = 2000
+    return report_data
+
+
 if __name__ == "__main__":
     db = dataset.connect('sqlite:///AutoInsurace.db', row_type=stuf)
     premium_change(db, "100420")
