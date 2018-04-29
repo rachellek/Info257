@@ -17,9 +17,9 @@ def premium_change(db, CustomerID):
     print("Customer original Risk Score {}".format(RiskScore))
 
     if New_RiskScore > (RiskScore * 1.5):
-        return "Yes"
+        print("The customer's premium has increased")
     else:
-        return "No"
+        print("The customer's premium has not changed")
 
 if __name__ == "__main__":
     db = dataset.connect('sqlite:///AutoInsurace.db', row_type=stuf)

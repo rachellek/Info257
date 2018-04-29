@@ -1,2 +1,2 @@
-CustomerID,ClaimID,ClaimDescription,VehicleID,Severity
-100420,10000,Car damaged in back.,10000000,1
+CustomerID,ClaimDescription,VehicleID,Severity
+100420,Car damaged in back.,10000000,1
