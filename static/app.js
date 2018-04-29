@@ -41,11 +41,36 @@ $(document).ready(function() {
       },
       error : function(request,error)
       {
-          alert("Request: "+JSON.stringify(request));
+          console.log("Request: "+JSON.stringify(request));
       }
     });
     $('#claim_vehicle').selectpicker('refresh');
 
+  });
+
+  $("#claim_submit").click(function() {
+
+    output = {
+      CustomerID: $('#claim_customer').val(),
+      VehicleID: $('#claim_vehicle').val(),
+      Severity: $('#claim_severity').val(),
+      ClaimDescription: $('#claim_description').val()
+    };
+
+    // submit claim data to server
+    $.ajax({
+      url : 'http://localhost:8888/claims/submit',
+      type: "POST",
+      dataType:'json',
+      data: JSON.stringify(output),
+      success: function(data){
+        $('#claim_report_modal').modal('show');
+      },
+      error: function(errMsg) {
+        $('#claim_submit_alert_content').html("There was an error submitting the claim.");
+        $('#claim_submit_alert').slideDown();
+      }
+    });
   });
 
 });
