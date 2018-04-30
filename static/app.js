@@ -16,6 +16,7 @@ function fill_report(data) {
   $("#report_claim_covered_repair_value").text(data.claim_covered_repair_value);
   $("#report_claim_out_of_pocket_expense").text(data.claim_out_of_pocket_expense);
   $("#report_claim_existing_deductible").text(data.claim_deductible_contributions);
+  $("#report_no_prior_claims").text(data.no_prior_claims);
   $("#report_claim_remaining_deductible").text(data.claim_remaining_deductible);
   $("#report_claim_new_risk_score").text(data.claim_new_risk_score);
   $("#report_claim_covered_repair_value2").text(data.claim_covered_repair_value);
@@ -34,14 +35,14 @@ function fill_report(data) {
 };
 
 $(document).ready(function() {
-    
+
   $.ajax({
     url : 'http://localhost:8888/customers',
     type : 'GET',
     dataType:'json',
-    success : function(data) {              
+    success : function(data) {
         $.each(data, function() {
-          $('#claim_customer').append($('<option>', { 
+          $('#claim_customer').append($('<option>', {
             value: this['CustomerID'],
             text : this['Name']
           }));
@@ -57,7 +58,7 @@ $(document).ready(function() {
 
 
   $("#claim_customer").on("changed.bs.select", function(e, clickedIndex, newValue, oldValue) {
-    
+
     // remove all options every time the customer selectchanges
     $('#claim_vehicle').find('option').remove().end();
 
@@ -65,9 +66,9 @@ $(document).ready(function() {
       url : 'http://localhost:8888/vehicles/bycustomer/' + this.value,
       type : 'GET',
       dataType:'json',
-      success : function(data) {              
+      success : function(data) {
           $.each(data, function() {
-            $('#claim_vehicle').append($('<option>', { 
+            $('#claim_vehicle').append($('<option>', {
               value: this[0]['VehicleID'],
               text : this[1]['Year'] + " " + this[1]['Make'] + " " + this[1]['Model']
             }));
@@ -110,13 +111,3 @@ $(document).ready(function() {
   });
 
 });
-
-
-
-
-
-
-
-
-
-
