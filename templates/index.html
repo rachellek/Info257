@@ -33,17 +33,22 @@
 
       <div class="form-group">
         <label for="claim_customer">Customer</label>
-        <select class="selectpicker form-control" id="claim_customer" title="Select customer"></select>
+        <div class="input-group">
+          <div class="input-group-prepend">
+            <button class="btn btn-outline-secondary" id="show_customer_btn" type="button">View</button>
+          </div>
+          <select class="selectpicker form-control" data-style="btn-outline-secondary" id="claim_customer" title="Select customer" data-live-search="true"></select>
+        </div>
       </div>
 
       <div class="form-group">
         <label for="claim_vehicle">Vehicle</label>
-        <select class="selectpicker form-control" id="claim_vehicle"></select>
+        <select class="selectpicker form-control" data-style="btn-outline-secondary"  id="claim_vehicle"></select>
       </div>
 
       <div class="form-group">
         <label for="claim_severity">Claim Severity</label>
-        <select class="selectpicker form-control" id="claim_severity">
+        <select class="selectpicker form-control" data-style="btn-outline-secondary" id="claim_severity">
           <option value="0">Level 0: Is that a scratch?</option>
           <option value="1">Level 1: Little bump</option>
           <option value="2">Level 2: Not looking pretty</option>
@@ -55,7 +60,7 @@
 
       <div class="form-group">
         <label for="claim_description">Claim Description</label>
-        <textarea class="form-control" id="claim_description" rows="3"></textarea>
+        <textarea class="form-control outline-secondary" id="claim_description" rows="3" style="border-color: #6c757d;"></textarea>
       </div>
 
       <div class="form-group">
@@ -68,6 +73,13 @@
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
+
+      <hr>
+
+      <div class="form-group">
+        <button class="btn btn-lg btn-info btn-block" id="view_statistics">Show Statistics</button>
+      </div>
+
     </div>
 
     <div class="modal fade bd-example-modal-lg" id="claim_report_modal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
@@ -135,6 +147,71 @@
               </div>
             </div>
 
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal fade bd-example-modal-lg" id="statistics_modal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Database Statistics</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <table class="table table-striped">
+              <tbody>
+                <tr>
+                  <th scope="row">Customers</th>
+                  <td id="stats_customers"></td>
+                </tr>
+                <tr>
+                  <th scope="row">Policies</th>
+                  <td id="stats_policies"></td>
+                </tr>
+                <tr>
+                  <th scope="row">Vehicle Types</th>
+                  <td id="stats_vehicle_types"></td>
+                </tr>
+                <tr>
+                  <th scope="row">Vehicles</th>
+                  <td id="stats_vehicles"></td>
+                </tr>
+                <tr>
+                  <th scope="row">Claims</th>
+                  <td id="stats_claims"></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal fade bd-example-modal-lg" id="customer_modal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Customer Detail</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <h3><span id="customer_customer_name"></span></h3>
+            <p>
+              <b>Customer ID</b>: <span id="customer_customer_id"></span><br />
+              <b>Policy Details</b>: <span id="customer_policy_details"></span><br />
+              <b>Premium</b>: $<span id="customer_policy_premium"></span> per year<br />
+              <b>Deductable</b>: $<span id="customer_policy_deductable"></span><br />
+              <b>Number of Vehicles</b>: <span id="customer_num_vehicles"></span><br />
+              <b>Number of Claims</b>: <span id="customer_num_claims"></span><br />
+              <b>Risk Score</b>: <span id="customer_risk_score"></span>
+            </p>
+            <div class="card-columns" id="customer_cars"></div>
           </div>
         </div>
       </div>

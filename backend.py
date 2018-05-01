@@ -95,8 +95,6 @@ def generate_report(db, input_data):
 
     # call helper calculation functions to compute all of the new numbers
     #...
-    print(customer_info)
-    print(vehicle_type_info)
 
     # Cost to repair
     customer_claim_cost_to_repair = claim_cost_to_repair(int(claim_info[0]["Severity"]), float(vehicle_type_info[0]["BookValue"]))
