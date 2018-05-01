@@ -42,8 +42,8 @@ function fill_customer(data) {
   $("#customer_customer_name").text(data.customer_name);
   $("#customer_customer_id").text(data.customer_id);
   $("#customer_policy_details").text(data.policy_details);
-  $("#customer_policy_premium").text(data.premium);
-  $("#customer_policy_deductable").text(data.deductible);
+  $("#customer_policy_premium").text(numberWithCommas(data.premium));
+  $("#customer_policy_deductable").text(numberWithCommas(data.deductible));
   $("#customer_num_vehicles").text(data.number_vehicles);
   $("#customer_num_claims").text(data.number_claims);
   $("#customer_risk_score").text(data.risk_score);
