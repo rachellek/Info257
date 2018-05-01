@@ -1,5 +1,14 @@
 # Auto Insurance
 
+## Dependencies
+```
+sqlite
+dataset
+stuf
+tornado
+bootstrap
+```
+
 ## Setup
 ```
 git clone https://github.com/rachellek/Info257.git
