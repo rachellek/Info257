@@ -1,4 +1,4 @@
-python Database_helpers.py -i data\claims.csv -t claims-c
+python Database_helpers.py -i data\claims.csv -t claims -c
 python Database_helpers.py -i data\customer.csv -t customer -c
 python Database_helpers.py -i data\policy.csv -t policy -c
 python Database_helpers.py -i data\vehicle.csv -t vehicle -c
