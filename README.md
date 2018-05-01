@@ -7,6 +7,8 @@ dataset
 stuf
 tornado
 bootstrap
+bootstrap-select
+jquery
 ```
 
 ## Setup
